@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>...</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #0b0b0f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    color: white;
+    flex-direction: column;
+    overflow: hidden; /* important for floating hearts */
+  }
+
+  .btn {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    background: white;
+    color: black;
+    font-weight: 600;
+    transition: 0.2s;
+    z-index: 2;
+  }
+
+  .btn:hover {
+    transform: scale(1.05);
+  }
+
+  .flower {
+    font-size: 0px;
+    transition: all 1s ease;
+    margin-top: 20px;
+    z-index: 2;
+  }
+
+  .message {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: 1s ease;
+    margin-top: 20px;
+    text-align: center;
+    max-width: 280px;
+    line-height: 1.4;
+    color: #eaeaea;
+    z-index: 2;
+  }
+
+  .bloom {
+    font-size: 90px !important;
+  }
+
+  .show {
+    opacity: 1 !important;
+    transform: translateY(0);
+  }
+
+  .hint {
+    position: absolute;
+    bottom: 20px;
+    font-size: 12px;
+    opacity: 0.4;
+    z-index: 2;
+  }
+
+  /* 💕 floating hearts */
+  .heart {
+    position: absolute;
+    bottom: -20px;
+    color: rgba(255, 255, 255, 0.08);
+    font-size: 16px;
+    animation: floatUp linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes floatUp {
+    from {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-120vh);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<button class="btn" onclick="bloom()">click</button>
+
+<div class="flower" id="flower">🌼</div>
+
+<div class="message" id="msg">
+  made this while taking a break.<br><br>
+  hope your day is going okay.
+</div>
+
+<div class="hint">you crossed my mind</div>
+
+<script>
+function bloom() {
+  document.getElementById("flower").classList.add("bloom");
+
+  setTimeout(() => {
+    document.getElementById("msg").classList.add("show");
+  }, 600);
+}
+
+/* 💕 generate floating hearts */
+for (let i = 0; i < 18; i++) {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "♥";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (5 + Math.random() * 6) + "s";
+  heart.style.fontSize = (10 + Math.random() * 18) + "px";
+  heart.style.opacity = Math.random() * 0.2;
+
+  document.body.appendChild(heart);
+}
+</script>
+
+</body>
+</html>
